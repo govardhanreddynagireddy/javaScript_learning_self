@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Type Conversion in JavaScript</h1>
+    <script>
+        //String → Number
+        let name="Govardhan";
+        console.log(typeof name);
+        console.log(name);
+        let num=Number(name);
+        console.log(num);
+        console.log(typeof num);
+        // Number -> String
+        let age=20;
+        console.log(age);
+        console.log(typeof age);
+        let Converted_age=String(age);
+        console.log(Converted_age);
+        console.log(typeof Converted_age);
+        // Boolean Conversion
+        console.log(Boolean(true));
+        console.log(Boolean(false));
+
+        console.log(Boolean(1));  // true
+        console.log(Boolean(0));  // false
+
+        //4. Truthy and Falsy
+        console.log(Boolean(0));         // false
+        console.log(Boolean(""));        // false
+        console.log(Boolean(null));      // false
+        console.log(Boolean(undefined)); // false
+
+
+        console.log(Boolean(" "));
+        console.log(Boolean([]));
+        console.log(Boolean({}));
+
+        let city;
+        console.log(Boolean(city));
+        console.log(typeof city);
+        console.log(city);
+        city=null;
+        console.log(Boolean(city));
+        console.log(typeof city);
+        console.log(city);
+
+
+    </script>
+</body>
+</html>
