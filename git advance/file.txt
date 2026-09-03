@@ -1,0 +1,247 @@
+Sure. Here is the complete list of Git commands we used above, in roughly the order they were used, with what each one does.
+
+1. Check Git status
+git status
+
+
+Shows:
+
+Current branch
+Modified files
+Staged files
+Untracked files
+Whether everything is committed
+2. Check branches
+git branch
+
+
+Shows your local branches.
+
+Example:
+
+* Main
+  main
+  vv
+
+
+* means the branch you're currently using.
+
+3. Check remote repository
+git remote -v
+
+
+Shows which GitHub repository is connected.
+
+Example:
+
+origin  https://github.com/govardhanreddynagireddy/javaScript_learning_self.git (fetch)
+origin  https://github.com/govardhanreddynagireddy/javaScript_learning_self.git (push)
+
+4. Add files to staging
+git add .
+
+
+Adds all changed/untracked files in the current project to the staging area.
+
+A more complete version for deletions too:
+
+git add -A
+
+5. Create a commit
+
+Correct syntax:
+
+git commit -m "Your commit message"
+
+
+For example:
+
+git commit -m "Initial commit"
+
+
+or:
+
+git commit -m "This on 11.26 am 03-09-2026"
+
+❌ Incorrect commands we encountered
+git commit-m "message"
+
+git commit - m "message"
+
+✅ Correct
+git commit -m "message"
+
+
+There must be a space between commit and -m.
+
+6. Push to GitHub
+
+Correct:
+
+git push -u origin main
+
+
+Meaning:
+
+push → upload commits
+-u → set upstream tracking
+origin → your GitHub repository
+main → branch you're pushing
+
+After upstream is configured, you can usually just use:
+
+git push
+
+7. Switch branches
+git switch vv
+
+
+Changes your current branch to vv.
+
+8. Rename a branch
+git branch -m Main main
+
+
+Renames Main to main.
+
+We couldn't use it because a local main already existed at that point.
+
+9. Delete a local branch
+git branch -D Main
+
+
+Force-deletes the local Main branch.
+
+We also used:
+
+git branch -D vv
+
+
+⚠️ -D force-deletes a branch, so use it carefully.
+
+10. Create an orphan branch
+git switch --orphan temp
+
+
+Creates a new branch with no previous commit history.
+
+This is what caused the situation where your new main had:
+
+No commits yet
+
+11. Rename the current branch
+git branch -M main
+
+
+Renames the current branch to main, forcing the rename if necessary.
+
+12. Check files in Windows CMD
+dir
+
+
+Shows files and folders in the current directory.
+
+To show hidden/system files too:
+
+dir /a
+
+13. Delete a file in Windows CMD
+del git
+
+
+We used this to try to remove the accidentally created file named git.
+
+It returned:
+
+Could Not Find ...
+
+
+which meant the file wasn't present at that moment.
+
+14. View commit history
+git log --oneline
+
+
+Shows commits in a compact format.
+
+For a graphical view of all branches:
+
+git log --oneline --decorate --all --graph
+
+15. View reflog
+git reflog
+
+
+Shows where HEAD and branches previously pointed.
+
+This is very useful for recovering commits after accidentally moving/deleting branches.
+
+In our case, your new main had no commits, so normal reflog couldn't help.
+
+16. Find unreachable Git objects
+git fsck --full --no-reflogs --unreachable
+
+
+This helped us find your deleted commit:
+
+unreachable commit 3f32bd210781b9e1a359666064ed281d342f8fe0
+
+
+This was the important recovery command.
+
+17. Recover the old commit
+git reset --hard 3f32bd210781b9e1a359666064ed281d342f8fe0
+
+
+This moved your new main branch to the recovered commit and restored the files.
+
+You then got:
+
+HEAD is now at 3f32bd2 This on 11.26 am 03-09-2026
+
+Most important commands to remember
+
+For normal daily JavaScript work, you generally only need these:
+
+git status
+git add .
+git commit -m "your message"
+git push
+
+
+And when starting work:
+
+git pull
+
+
+So a normal workflow is:
+
+git pull
+
+
+Make your code changes.
+
+Then:
+
+git status
+git add .
+git commit -m "Week 2 Day 2 changes"
+git push
+
+Your basic Git workflow
+GitHub
+   ↑
+ git push
+   ↑
+Commit
+   ↑
+git add .
+   ↑
+Your code changes
+   ↓
+git pull
+   ↓
+GitHub
+
+
+One important lesson from what happened: avoid git branch -D, git switch --orphan, and git reset --hard unless you know exactly why you're using them. They can make recovery much harder.
